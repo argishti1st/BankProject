@@ -11,7 +11,7 @@ namespace WebApplication1.Action_classes
 {
     public class Edit
     {
-        public void EditGet(int id)
+        public Customer EditGet(int id)
         {
             string connectionString =
           ConfigurationManager.ConnectionStrings["connection"].ConnectionString;
@@ -91,7 +91,8 @@ namespace WebApplication1.Action_classes
                 customer.Phones.AddRange(phones);
 
             }
-            
+
+            return customer;
         }
     }
 }
