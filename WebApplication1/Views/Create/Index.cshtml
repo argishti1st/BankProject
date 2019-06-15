@@ -1,0 +1,276 @@
+﻿@model UserCreation.Models.Customer
+
+
+@{
+    ViewBag.Title = "Նոր Հաճախորդ";
+}
+
+<h2>Նոր Հաճախորդ</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+<div class="form-horizontal">
+    <h4>Հարկավոր է լրացնել բոլոր դաշտերը։</h4>
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="form-group">
+        @Html.LabelFor(model => model.FirstName, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.FirstName, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.LastName, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.LastName, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.LastName, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.MiddleName, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.MiddleName, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.MiddleName, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.DateOfBirth, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            <input type="date" name="DateOfBirth" />
+
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Gender, htmlAttributes: new { @class = "control-label col-md-2" })
+        <select name="Gender">
+            <option selected disabled> Ընտրել սեռը </option>
+            <option value=0>Իգական</option>
+            <option value=1>Արական</option>
+
+        </select>
+    </div>
+
+    <div style="display:flex;">
+        <div class="form-group" style="margin-top: 37px;">
+            <div class="col-md-10">
+                <select name="Addresses[0].AddressType">
+                    @Html.LabelFor(model => model.Addresses[0].AddressType, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <option selected value=0>Գրանցված</option>
+                    <option value=1>Փաստացի</option>
+                </select>
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            <div class="col-md-10">
+                @Html.LabelFor(model => model.Addresses[0].Country, htmlAttributes: new { @class = "control-label col-md-2" })
+
+                @Html.EditorFor(model => model.Addresses[0].Country, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Addresses[0].Country, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+
+            <div class="col-md-10">
+                @Html.LabelFor(model => model.Addresses[0].City, htmlAttributes: new { @class = "control-label col-md-2" })
+                @Html.EditorFor(model => model.Addresses[0].City, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Addresses[0].City, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+
+            <div class="col-md-10">
+                @Html.LabelFor(model => model.Addresses[0].Street, htmlAttributes: new { @class = "control-label col-md-2" })
+                @Html.EditorFor(model => model.Addresses[0].Street, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Addresses[0].Street, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+
+            <div class="col-md-10">
+                @Html.LabelFor(model => model.Addresses[0].Apartment, htmlAttributes: new { @class = "control-label col-md-2" })
+                @Html.EditorFor(model => model.Addresses[0].Apartment, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Addresses[0].Apartment, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    </div>
+    <div>
+        <script type="text/javascript">
+            function yesnoCheck() {
+                if (document.getElementById('noCheck').checked) {
+                    document.getElementById('ifYes').style.display = 'block';
+                }
+                else {
+                    document.getElementById('ifYes').style.display = 'none';
+
+                }
+            }
+/**/</script>
+
+        Ձեր գրանցված և Փաստացի հասցեները նույնն ե՞ն
+        <input type="radio" onclick="javascript:yesnoCheck();" name="yesno" id="yesCheck" checked="checked" />Yes
+
+        <input type="radio" onclick="javascript:yesnoCheck();" name="yesno" id="noCheck" /> No
+        <br>
+        <div id="ifYes" style="display:none">
+            <div style="display:flex;">
+                <div class="form-group" style="margin-top: 37px;">
+                    <div class="col-md-10">
+                        <select name="Addresses[1].AddressType">
+                            @Html.LabelFor(model => model.Addresses[1].AddressType, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <option value=0>Գրանցված</option>
+                            <option selected value=1>Փաստացի</option>
+
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+
+                    <div class="col-md-10">
+                        @Html.LabelFor(model => model.Addresses[1].Country, htmlAttributes: new { @class = "control-label col-md-2" })
+                        @Html.EditorFor(model => model.Addresses[1].Country, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Addresses[1].Country, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+
+                    <div class="col-md-10">
+                        @Html.LabelFor(model => model.Addresses[1].City, htmlAttributes: new { @class = "control-label col-md-2" })
+                        @Html.EditorFor(model => model.Addresses[1].City, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Addresses[1].City, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+
+                    <div class="col-md-10">
+                        @Html.LabelFor(model => model.Addresses[1].Street, htmlAttributes: new { @class = "control-label col-md-2" })
+                        @Html.EditorFor(model => model.Addresses[1].Street, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Addresses[1].Street, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+
+                    <div class="col-md-10">
+                        @Html.LabelFor(model => model.Addresses[1].Apartment, htmlAttributes: new { @class = "control-label col-md-2" })
+                        @Html.EditorFor(model => model.Addresses[1].Apartment, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Addresses[1].Apartment, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
+        <div class="form-group">
+
+            <div class="col-md-10" id="ifYes" style="display:none">
+                @Html.LabelFor(model => model.Addresses[0].Apartment, htmlAttributes: new { @class = "control-label col-md-2" })
+                @Html.EditorFor(model => model.Addresses[0].Apartment, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Addresses[0].Apartment, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    </div>
+
+
+
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Phones[0].Phone, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10" style="display:flex">
+
+            @Html.EditorFor(model => model.Phones[0].Phone, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Phones[0].Phone, "", new { @class = "text-danger" })
+            <input id="btnAdd" type="button" value="Add" class=“btn” style="background: #333; color:#9d9d9d;" onclick="AddTextBox()" />
+        </div>
+    </div>
+        <br />
+        <br />
+        <div id="TextBoxContainer">
+            <!--Textboxes will be added here -->
+        </div>
+
+        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+        <script type="text/javascript">
+        var counter = 1;
+    function GetDynamicTextBox(value) {
+            var div = $("<div />");
+
+            var textBox = $("<input />").attr("type", "textbox").attr("name", "Phones["+counter+"].Phone");
+            textBox.val(value);
+
+            div.append(textBox);
+
+            var button = $("<input />").attr("type", "button").attr("value", "Remove");
+            button.attr("onclick", "RemoveTextBox(this)");
+            div.append(button);
+        counter++;
+            return div;
+        }
+        function AddTextBox() {
+            var div = GetDynamicTextBox("");
+            $("#TextBoxContainer").append(div);
+        }
+
+        function RemoveTextBox(button) {
+            $(button).parent().remove();
+        }
+
+        $(function () {
+            var values = eval('@Html.Raw(ViewBag.Values)');
+            if (values != null) {
+                $("#TextBoxContainer").html("");
+                $(values).each(function () {
+                    $("#TextBoxContainer").append(GetDynamicTextBox(this));
+                });
+            }
+        });
+
+        </script>
+
+
+
+
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Passport, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Passport, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Passport, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Ստեղծել" class="btn" style="background: #333; color:#9d9d9d;" onclick="location.href='@Url.Action("Index", "Create")'" />
+
+            </div>
+        </div>
+    </div>
+    }
+
+    <div>
+        @Html.ActionLink("Վերադառնալ Գլխավոր Էջ", "Customers", "Home")
+    </div>
